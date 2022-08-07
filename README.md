@@ -1,92 +1,176 @@
-# hash-table--task--python
+# Hash table (Python)
 
+Set of programming assignments that are designed to test knowledge of hash table data structure.
 
+## Problem 1: Implement HashTable with chaining
 
-## Getting started
+Implement a HashTable interface **without using any hash table libraries**.
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+The following building blocks are provided for you:
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+* Let us assume for this programming assignments that only integer numbers will be used as keys. `KeyValueData` wraps a (key, value) pair.
+```python
+# tasks/hash_table.py
 
-## Add your files
-
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
-
+class KeyValueData:
+    """Data that will be stored in hash table.
+    
+    NOTE: no need to change this class.
+    """
+    def __init__(self, key: int, value: Any):
+        self.key = key
+        self.value = value
 ```
-cd existing_repo
-git remote add origin https://gitlab.com/epam-gap-bs-ads/hash-table-task-python.git
-git branch -M main
-git push -uf origin main
+
+* Each chain or bucket of `HashTable` will be be handled by `Bucket` class that has the following API:
+```python
+# tasks/hash_table.py
+
+class Bucket:
+    """Represents a set of (K,V) pairs that were assigned to the same bin/chain/bucket."""
+
+    def __init__(self):
+        self.elements: List[KeyValueData] = []
+
+    def get(self, key: int) -> Optional[Any]:
+        """Returns the value for a given key.
+        
+        Raises:
+            ValueError: If no corresponding (K,V) is found.
+        """
+        pass
+
+    def put(self, key: int, value: Any):
+        """Puts a given (K,V) pair into the bucket."""
+        pass
+
+    def remove(self, key: int):
+        """Removes the (K,V) pair for a given key.
+        
+        Raises:
+            ValueError: If no corresponding (K,V) is found.
+        """
+        pass
 ```
 
-## Integrate with your tools
+* Main `HashTable` API:
+```python
+# tasks/hash_table.py
 
-- [ ] [Set up project integrations](https://gitlab.com/epam-gap-bs-ads/hash-table-task-python/-/settings/integrations)
+class HashTable:
+    """Basic Hash Table interface."""
 
-## Collaborate with your team
+    def __init__(self, n_buckets: int = 100):
+        self.n_buckets = n_buckets
+        self.buckets = ... # Create #n_buckets Bucket objects.
+    
+    def h(self, key: int) -> int:
+        # Here we use the simplest form of hash function.
+        return key % self.n_buckets
+    
+    def set(self, key: int, value: Any):
+        """Inserts a given (K,V) pair.
+        
+        NOTE: in case the key is already in the hash table - the value should be replaced.
+        """
+        pass
+    
+    def get(self, key: int) -> Optional[Any]:
+        """Returns the value for a given key.
+        
+        Raises:
+            ValueError: If no corresponding (K,V) is found.
+        """
+        pass
+    
+    def remove(self, key: int):
+        """Removes the (K,V) pair for a given key.
+        
+        Raises:
+            ValueError: If no corresponding (K,V) is found.
+        """
+        pass
+```
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+**Example:**
 
-## Test and Deploy
+```python
+hash_table = HashTable(n_buckets=3)
+hash_table.set(0, 'hello') # 0 bucket
+hash_table.set(1, 'world') # 1 bucket
+assert hash_table.get(0) == 'hello'
 
-Use the built-in continuous integration in GitLab.
+hash_table.set(3, 'hello2') # 0 bucket again
+assert len(hash_table.buckets[0].elements) == 2
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+hash_table.set(0, 'hello_new') # 0 bucket, replace
+assert len(hash_table.buckets[0].elements) == 2
+assert hash_table.get(0) == 'hello_new'
+```
 
-***
 
-# Editing this README
+Please use a template for the implementation (`tasks/hash_table.py`).
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
 
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+## Problem 2: Find two numbers that add up to a given target
 
-## Name
-Choose a self-explaining name for your project.
+Given an array of integers `values` and an integer `target`, return *indices of the two numbers such that they add up to `target`*.
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+You may assume that each input would have **exactly one solution**, and you may not use the same element twice.
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+You can return the answer in any order.
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+**Constraints**
+* 2 <= values.length <= 3*10^5
+* -10^9 <= values[i] <= 10^9
+* -10^9 <= target <= 10^9
+* Only one valid answer exists.
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+**Example 1:**
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+Input: values = [1, 2, 3, 4, 5], target = 4
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+Output: [0, 2]
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+Explanation: values[0] + values[2] == 4
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+**Example 2:**
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+Input: values = [1, 2, 3, 4, 5], target = 8
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+Output: [2, 4]
 
-## License
-For open source projects, say how it is licensed.
+Explanation: values[2] + values[4] == 8
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+
+Please use a template for the implementation (`tasks/two_sum.py`).
+
+
+## Problem 3: Repeated DNA Sequences
+
+The **DNA sequence** is composed of a series of nucleotides abbreviated as `'A'`, `'C'`, `'G'` and `'T'`.
+
+For example, `"ACGAATTCCG"` is a DNA sequence.
+When studying **DNA**, it is useful to identify repeated sequences within the DNA.
+
+Given a string `dna_sequence` that represents a **DNA sequence**, return all the `8`**-letter-long** sequences (substrings) that occur more than once in a DNA molecule. You may return the answer in **any order**.
+
+**Constraints**
+* 1 <= dna_sequence.length <= 10^5
+* dna_sequence contains only 'A', 'C', 'G' and 'T' characters.
+
+**Example 1**
+
+Input: dna_sequence='AAAATTTTAAAATTTT'
+
+Output: ['AAAATTTT']
+
+
+**Example 2**
+
+Input: dna_sequence='ATATATATATA'
+
+Output: ['ATATATAT', 'TATATATA']
+
+Please use a template for the implementation (`tasks/dna.py`).
