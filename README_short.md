@@ -1,17 +1,15 @@
-# Hash table (Python)
+# Hash table
 
-Set of programming assignments that are designed to test knowledge of hash table data structure.
+## Purpose
 
-## Problem 1: Implement HashTable with chaining
+The coding exercises are designed to test knowledge of the following concepts:
 
-Implement a HashTable interface **without using any hash table libraries**.
+* Hash Table data structure and its API
+* Collisions resolution via the chaining (bucketing) method
 
+## Overview
 
-## Problem 2: Find two numbers that add up to a given target
-
-Given an array of integers `values` and an integer `target`, return *indices of the two numbers such that they add up to `target`*.
-
-
-## Problem 3: Repeated DNA Sequences
-
-Given a string `dna_sequence` that represents a **DNA sequence**, return all the `8`**-letter-long** sequences (substrings) that occur more than once in a DNA molecule. You may return the answer in **any order**.
+The coding exercises cover the following practical problems:
+* Implementing Hash Table with chaining
+* 2-SUM problem
+* Finding all repeated patterns in DNA sequence

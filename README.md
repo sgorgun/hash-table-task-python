@@ -1,8 +1,22 @@
-# Hash table (Python)
+# Hash table
 
-Set of programming assignments that are designed to test knowledge of hash table data structure.
+## Purpose
 
-## Problem 1: Implement HashTable with chaining
+The coding exercises are designed to test knowledge of the following concepts:
+
+* Hash Table data structure and its API
+* Collisions resolution via the chaining (bucketing) method
+
+## Overview
+
+The coding exercises cover the following practical problems:
+* Implementing Hash Table with chaining
+* 2-SUM problem
+* Finding all repeated patterns in DNA sequence
+
+## Coding exercises
+
+### Exercise 1: Implement HashTable with chaining
 
 Implement a HashTable interface **without using any hash table libraries**.
 
@@ -108,11 +122,11 @@ assert len(hash_table.buckets[0].elements) == 2
 assert hash_table.get(0) == 'hello_new'
 ```
 
+<br>
 
 Please use a template for the implementation (`tasks/hash_table.py`).
 
-
-## Problem 2: Find two numbers that add up to a given target
+### Exercise 2: Find two numbers that add up to a given target
 
 Given an array of integers `values` and an integer `target`, return *indices of the two numbers such that they add up to `target`*.
 
@@ -125,6 +139,22 @@ You can return the answer in any order.
 * -10^9 <= values[i] <= 10^9
 * -10^9 <= target <= 10^9
 * Only one valid answer exists.
+
+Your task is to implement the following function for solving the problem above:
+
+```python
+def find_target_sum(values: List[int], target: int) -> Tuple[int, int]:
+    """Returns a pair of indices so that the corresponding values add up to a given target.
+
+    Args:
+        values: List, available elements for look up.
+        target: int, target sum for look up.
+
+    Returns:
+        Tuple[int, int], two indices of interest.
+    """
+    pass
+```
 
 **Example 1:**
 
@@ -143,11 +173,11 @@ Output: [2, 4]
 
 Explanation: values[2] + values[4] == 8
 
+<br>
 
-Please use a template for the implementation (`tasks/two_sum.py`).
+Please use a template for the implementation (`tasks/two_sum.py:find_target_sum`).
 
-
-## Problem 3: Repeated DNA Sequences
+### Exercise 3: Repeated DNA Sequences
 
 The **DNA sequence** is composed of a series of nucleotides abbreviated as `'A'`, `'C'`, `'G'` and `'T'`.
 
@@ -159,6 +189,21 @@ Given a string `dna_sequence` that represents a **DNA sequence**, return all the
 **Constraints**
 * 1 <= dna_sequence.length <= 10^5
 * dna_sequence contains only 'A', 'C', 'G' and 'T' characters.
+
+Your task is to implement the following function for solving the problem above:
+
+```python
+def find_repeated_dna_sequences(dna_sequence: str) -> List[str]:
+    """Returns all 8-letter-long substrings that occur more than once.
+
+    Args:
+        dna_sequence: str, a given DNA sequence.
+
+    Returns:
+        List[str], list of all 8-letter-long substrings that occur more than once.
+    """
+    pass
+```
 
 **Example 1**
 
@@ -173,4 +218,6 @@ Input: dna_sequence='ATATATATATA'
 
 Output: ['ATATATAT', 'TATATATA']
 
-Please use a template for the implementation (`tasks/dna.py`).
+<br>
+
+Please use a template for the implementation (`tasks/dna.py:find_repeated_dna_sequences`).
