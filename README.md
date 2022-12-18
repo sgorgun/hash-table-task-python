@@ -2,27 +2,27 @@
 
 ## Purpose
 
-The coding exercises are designed to test knowledge of the following concepts:
+The following coding exercises are designed to test your knowledge of the following concepts:
 
-* Hash Table data structure and its API
-* Collisions resolution via the chaining (bucketing) method
+* Hash table data structure and its API
+* Resolving collisions using the chaining (bucketing) method
 
 ## Overview
 
 The coding exercises cover the following practical problems:
-* Implementing Hash Table with chaining
-* 2-SUM problem
-* Finding all repeated patterns in DNA sequence
+* Implementing a hash table with chaining
+* The 2-SUM problem
+* Finding repeated patterns in a DNA sequence
 
 ## Coding exercises
 
-### Exercise 1: Implement HashTable with chaining
+### Exercise 1: Implement a hash table with chaining
 
-Implement a HashTable interface **without using any hash table libraries**.
+Implement the HashTable interface **without using any hash table libraries**.
 
 The following building blocks are provided for you:
 
-* Let us assume for this programming assignments that only integer numbers will be used as keys. `KeyValueData` wraps a (key, value) pair.
+* Assume that only integers will be used as keys. `KeyValueData` wraps a (key, value) pair.
 ```python
 # tasks/hash_table.py
 
@@ -36,7 +36,7 @@ class KeyValueData:
         self.value = value
 ```
 
-* Each chain or bucket of `HashTable` will be be handled by `Bucket` class that has the following API:
+* Each chain or bucket of `HashTable` will be be handled by the `Bucket` class, which has the following API:
 ```python
 # tasks/hash_table.py
 
@@ -79,13 +79,13 @@ class HashTable:
         self.buckets = ... # Create #n_buckets Bucket objects.
     
     def h(self, key: int) -> int:
-        # Here we use the simplest form of hash function.
+        # Here we use the simplest type of hash function.
         return key % self.n_buckets
     
     def set(self, key: int, value: Any):
         """Inserts a given (K,V) pair.
         
-        NOTE: in case the key is already in the hash table - the value should be replaced.
+        NOTE: If the key is already in the hash table, the value should be replaced.
         """
         pass
     
@@ -124,13 +124,13 @@ assert hash_table.get(0) == 'hello_new'
 
 <br>
 
-Please use a template for the implementation (`tasks/hash_table.py`).
+Please use the template `tasks/hash_table.py` for the implementation.
 
 ### Exercise 2: Find two numbers that add up to a given target
 
-Given an array of integers `values` and an integer `target`, return *indices of the two numbers such that they add up to `target`*.
+Given an array of integers `values` and an integer `target`, return *indices of the two numbers so that they add up to `target`*.
 
-You may assume that each input would have **exactly one solution**, and you may not use the same element twice.
+Assume that each input will have **exactly one solution** and you may not use the same element twice.
 
 You can return the answer in any order.
 
@@ -147,8 +147,8 @@ def find_target_sum(values: List[int], target: int) -> Tuple[int, int]:
     """Returns a pair of indices so that the corresponding values add up to a given target.
 
     Args:
-        values: List, available elements for look up.
-        target: int, target sum for look up.
+        values: List, available elements for look-up.
+        target: int, target sum for look-up.
 
     Returns:
         Tuple[int, int], two indices of interest.
@@ -175,22 +175,22 @@ Explanation: values[2] + values[4] == 8
 
 <br>
 
-Please use a template for the implementation (`tasks/two_sum.py:find_target_sum`).
+Please use the template `tasks/two_sum.py:find_target_sum` for the implementation.
 
 ### Exercise 3: Repeated DNA Sequences
 
-The **DNA sequence** is composed of a series of nucleotides abbreviated as `'A'`, `'C'`, `'G'` and `'T'`.
+A **DNA sequence** is composed of a series of nucleotides abbreviated `'A'`, `'C'`, `'G'`, and `'T'`.
 
 For example, `"ACGAATTCCG"` is a DNA sequence.
 When studying **DNA**, it is useful to identify repeated sequences within the DNA.
 
-Given a string `dna_sequence` that represents a **DNA sequence**, return all the `8`**-letter-long** sequences (substrings) that occur more than once in a DNA molecule. You may return the answer in **any order**.
+Given a string `dna_sequence` that represents a **DNA sequence**, return all the `8`**-letter-long** sequences (substrings) that occur more than once in the DNA molecule. You may return the answer in **any order**.
 
 **Constraints**
 * 1 <= dna_sequence.length <= 10^5
 * dna_sequence contains only 'A', 'C', 'G' and 'T' characters.
 
-Your task is to implement the following function for solving the problem above:
+Your task is to implement the following function to solve the problem above:
 
 ```python
 def find_repeated_dna_sequences(dna_sequence: str) -> List[str]:
@@ -220,4 +220,4 @@ Output: ['ATATATAT', 'TATATATA']
 
 <br>
 
-Please use a template for the implementation (`tasks/dna.py:find_repeated_dna_sequences`).
+Please use the template `tasks/dna.py:find_repeated_dna_sequences` for the implementation.

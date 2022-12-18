@@ -47,13 +47,13 @@ class HashTable:
         self.buckets = ... # Create #n_buckets Bucket objects.
     
     def h(self, key: int) -> int:
-        # Here we use the simplest form of hash function.
+        # Here we use the simplest type of hash function.
         return key % self.n_buckets
     
     def set(self, key: int, value: Any):
         """Inserts a given (K,V) pair.
         
-        NOTE: in case the key is already in the hash table - the value should be replaced.
+        NOTE: If the key is already in the hash table, the value should be replaced.
         """
         pass
     
