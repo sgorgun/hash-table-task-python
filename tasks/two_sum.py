@@ -12,4 +12,14 @@ def find_target_sum(values: List[int], target: int) -> Tuple[int, int]:
     Returns:
         Tuple[int, int], two indices of interest.
     """
-    pass
+    hash_table = {}
+
+    for i, value in enumerate(values):
+        difference = target - value
+
+        if difference in hash_table:
+            return hash_table[difference], i
+
+        hash_table[value] = i
+
+    return None, None

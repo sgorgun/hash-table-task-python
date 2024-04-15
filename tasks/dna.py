@@ -40,4 +40,16 @@ def find_repeated_dna_sequences(dna_sequence: str) -> List[str]:
     Returns:
         List[str], list of all 8-letter-long substrings that occur more than once.
     """
-    pass
+    hash_table = {}
+
+    repeated_substrings = []
+
+    for i in range(len(dna_sequence) - 7):
+        current_substring = dna_sequence[i:i + 8]
+
+        hash_table[current_substring] = hash_table.get(current_substring, 0) + 1
+
+        if hash_table[current_substring] == 2:
+            repeated_substrings.append(current_substring)
+
+    return repeated_substrings
